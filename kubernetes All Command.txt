@@ -1,0 +1,49 @@
+#To install kubeadm
+kubeadm init --pod-network-cidr=192.168.0.0/16 for Calico
+kubeadm init --pod-network-cidr=10.240.0.0/16 for Fannel
+kubeadm init --pod-network-cidr=10.244.0.0/16 without firewell
+
+
+#To install calico 
+1.kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
+
+#Apply wave-net in the master node 
+#To solve the pending issue in master node
+kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
+
+#TO see the Nodes
+kubectl get nondes
+kubectl get nodes --all-namespaces -o wide
+
+#To describe nodes
+kubectl describe nodes
+
+#To see pods
+kubectl get pods
+kubectl get pods --all-namespaces -o wide
+
+#To see all the pods in Watched mode
+watch kubectl get pods --all-namespaces -o wide
+
+#To remove kubernetes from ubuntu server
+sudo kubeadm reset
+sudo apt-get remove kubeadm kubectl kubelet kubernetes-cni kube*
+sudo apt-get autoremove 
+sudo rm -rf ~/.kube
+
+
+#Remove Docker from Ubuntu
+sudo apt-get purge docker-ce.
+
+#To completely uninstall Docker:
+STEP -1
+dpkg -l | grep -i docker
+STEP 2
+sudo apt-get purge -y docker-engine docker docker.io docker-ce  
+sudo apt-get autoremove -y --purge docker-engine docker docker.io docker-ce  
+
+#To change hostname in Ubuntu
+sudo hostnamectl set-hostname xxxxx
+
+#To delete Folder in ubuntu
+sudo rm -r folderName
